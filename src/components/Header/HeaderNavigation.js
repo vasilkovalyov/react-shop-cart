@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { NavLink } from "react-router-dom";
 
 import './Header.scss';
@@ -19,6 +19,7 @@ function HeaderNavigation(props) {
             <ul className="navigation">
                 {navigation}
             </ul>
+            {props.children}
         </nav>
     );
 }

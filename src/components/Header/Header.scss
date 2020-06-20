@@ -18,6 +18,11 @@
             color: #ffffff;
         }
     }
+
+    &__navigation {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .navigation {
@@ -56,5 +61,19 @@
                 opacity: 1; 
             }
         }
+    }
+}
+
+.shop-cart {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+
+    &__icon {
+        width: 18px;
+    }
+
+    &__counter {
+        margin-left: 5px;
     }
 }
