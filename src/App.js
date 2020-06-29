@@ -12,6 +12,7 @@ import Header from './components/Header/Header.jsx'
 
 import Shop from './pages/Shop/Shop.jsx'
 import Cart from './pages/Cart/Cart.jsx'
+import ProductInner from './pages/ProductInner/ProductInner.jsx'
 
 
 class App extends Component {
@@ -23,10 +24,13 @@ class App extends Component {
 		return (
 			<BrowserRouter id="wrapper">
 				<Header />
-				<Switch>
-					<Route exact path="/shop" component={Shop} />
-					<Route exact path="/cart"  component={Cart}/>
-				</Switch>
+				<div id="main">
+					<Switch>
+						<Route exact path="/shop" component={Shop} />
+						<Route exact path="/cart"  component={Cart}/>
+						<Route exact path="/product/:id" component={ProductInner}/>
+					</Switch>
+				</div>
 			</BrowserRouter>
 		);
 	}

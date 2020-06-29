@@ -1,0 +1,12 @@
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+
+    .col {
+        max-width: 33.33%;
+        width: 100%;
+        padding: 0 15px;
+        display: flex;
+    }
+}
