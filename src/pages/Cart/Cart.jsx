@@ -4,7 +4,7 @@ import './Cart.scss';
 
 function Cart() {
     return (
-        <section className="cart-page">
+        <section className="section-cart">
             <div className="container">
                 <h1>Cart page</h1>
             </div>

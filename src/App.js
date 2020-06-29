@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	BrowserRouter,
 	Switch,
@@ -8,25 +8,28 @@ import {
 
 import './App.scss';
 
-import Header from './components/Header/Header'
+import Header from './components/Header/Header.jsx'
 
-import Home from './pages/Home/Home'
-import Shop from './pages/Shop/Shop'
-import Cart from './pages/Cart/Cart'
-import ProductPage from './pages/ProductPage/ProductPage';
+import Shop from './pages/Shop/Shop.jsx'
+import Cart from './pages/Cart/Cart.jsx'
 
-function App() {
-    return (
-        <BrowserRouter id="wrapper">
-            <Header />
-			<Switch>
-				<Route exact path="/" component={Home} />
-				<Route path="/shop" component={Shop} />
-				<Route path="/cart"  component={Cart}/>
-				<Route path="/product/:id" component={ProductPage} />
-			</Switch>
-        </BrowserRouter>
-    );
+
+class App extends Component {
+	componentDidMount() {
+		
+	}
+
+    render() {
+		return (
+			<BrowserRouter id="wrapper">
+				<Header />
+				<Switch>
+					<Route exact path="/shop" component={Shop} />
+					<Route exact path="/cart"  component={Cart}/>
+				</Switch>
+			</BrowserRouter>
+		);
+	}
 }
 
 export default App;
