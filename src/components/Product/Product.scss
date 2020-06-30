@@ -1,12 +1,45 @@
 .product {
     background-color: #ffffff;
     border: 1px solid #e1e1e1;
-    padding: 20px;
+    position: relative;
+    padding: 30px 30px 80px;
+    overflow: hidden;
 
+    &:hover {
+        .product {
+            &__hidden_content {
+                opacity: 1;
+                transform: translateY(0);
+                transition: all 0.5s ease;
+            }
+        }
+    }
+
+    &__discount {
+        background: #ea3b02;
+        color: #ffffff;
+        display: inline-block;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        position: absolute;
+        top: 0;
+        left: 15px;
+        width: 40px;
+        height: 45px;
+        z-index: 9;
+        font-size: 14px;
+        padding: 5px;
+
+        &-text {
+            display: block;
+            margin-bottom: 2px;
+        }
+    }
 
     &__image {
         margin-bottom: 30px;
-        height: 170px;
+        height: 163px;
 
         img {
             width: 100%;
@@ -19,6 +52,12 @@
         display: block;
         text-align: center;
         margin-bottom: 20px;
+        color: #1b222a;
+        transition: color 0.3s linear;
+
+        &:hover {
+            color: #ff8f00;
+        }
     }
 
     &__price-holder {
@@ -27,5 +66,48 @@
 
     &__price {
         color: #ea3b02;
+
+        &-old {
+            color: #a1a0a0;
+        }
+    }
+
+    &__hidden_content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        padding: 20px;
+        transform: translateY(100px);
+        transition: all 0.3s ease;
+    }
+
+    &__btn-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__btn {
+        background: #2ba8db;
+        border-radius: 5px;
+        color: #ffffff;
+        display: block;
+        font-weight: bold;
+        height: 35px;
+        line-height: 35px;
+        padding: 0 10px;
+        text-transform: uppercase;
+        margin: 0 5px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s linear;
+
+        &:hover {
+            color: #ff8f00;
+        }
     }
 }

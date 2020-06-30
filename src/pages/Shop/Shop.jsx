@@ -10,7 +10,12 @@ const bikes = [
         price: '1700.00',
         currency: '$',
         name: 'BMW Cruise Bike Mineral White',
-        raiting: '4'
+        raiting: '4',
+        discount: {
+            isActive: true,
+            oldPrice: '1899.00',
+            percent: '10%'
+        },
     },
     {
         id: 2,
@@ -18,7 +23,10 @@ const bikes = [
         price: '420.00',
         currency: '$',
         name: 'Comanche TOMAHAWK 29 blacke',
-        raiting: '3'
+        raiting: '3',
+        discount: {
+            isActive: false,
+        },
     },
     {
         id: 3,
@@ -26,7 +34,10 @@ const bikes = [
         price: '3840.00',
         currency: '$',
         name: 'Cannondale TOPSTONE Carbon Lefty',
-        raiting: '5'
+        raiting: '5',
+        discount: {
+            isActive: false,
+        },
     },
 ]
 

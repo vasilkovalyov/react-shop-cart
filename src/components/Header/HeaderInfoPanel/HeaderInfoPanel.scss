@@ -1,0 +1,49 @@
+.header-info-panel {
+    display: flex;
+    align-items: center;
+
+
+    .info-circle {
+        &:not(:first-child) {
+            margin-left: 25px;
+        }
+    }
+}
+
+.info-circle {
+    position: relative;
+    color: #ffffff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+
+    &__icon-holder {
+        background: #ffffff;
+        border-radius: 50%;
+        color: #008dc7;
+        width: 43px;
+        height: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__counter {
+        position: absolute;
+        top: 14px;
+        left: -11px;
+        border-radius: 100%;
+        font-size: 14px;
+        color: #ffffff;
+        background-color: #ff8f00;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .price {
+        margin-left: 10px;
+    }
+}

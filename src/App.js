@@ -16,17 +16,13 @@ import ProductInner from './pages/ProductInner/ProductInner.jsx'
 
 
 class App extends Component {
-	componentDidMount() {
-		
-	}
-
     render() {
 		return (
 			<BrowserRouter id="wrapper">
 				<Header />
 				<div id="main">
 					<Switch>
-						<Route exact path="/shop" component={Shop} />
+						<Route exact path="/" component={Shop} />
 						<Route exact path="/cart"  component={Cart}/>
 						<Route exact path="/product/:id" component={ProductInner}/>
 					</Switch>

@@ -1,0 +1,32 @@
+.header-navigation {
+    display: flex;
+    align-items: center;
+
+    &__list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 14px;
+    }
+    
+    &__item {
+        &:not(:first-child) {
+            margin-left: 10px;
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+        color: #fff;
+        transition: color 0.3s linear;
+
+        &:hover {
+            color: #ff8f00;
+        }
+    }
+}
