@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ProductCart.scss';
 
 import RatingStar from '../RatingStar/RatingStar'
@@ -7,10 +7,14 @@ import { Link } from 'react-router-dom';
 import QuantityCounter from '../QuantityCounter/QuantityCounter'
 import { connect } from 'react-redux';
 
-import { removeProductFromCart } from '../../redux/actions/cart/index'
+import { 
+    removeProductFromCart,
+    increaseProductCount,
+    decreaseProductCount
+} from '../../redux/actions/cart/index'
 
 function CartProduct(props) {
-    let {id, image, price, currency, name, raiting, discount} = props.product;
+    let {id, image, price, currency, name, raiting, discount, count} = props.product;
 
     return (
         <tr className="product-cart">
@@ -24,7 +28,11 @@ function CartProduct(props) {
                 <RatingStar raiting={raiting} raitingClass="product__list-rating"/>
             </td>
             <td className="product-cart__quantity-cell">
-                <QuantityCounter />
+                <QuantityCounter 
+                    count={count}
+                    handlerBtnDecrease = {() => props.increaseProductCount(props.product) }
+                    handlerBtnIncrease = {() => props.decreaseProductCount(props.product) }
+                />
             </td>
             <td className="product-cart__price-cell">
                 <span className="product-cart__price">{price}{currency}</span>
@@ -42,7 +50,15 @@ function CartProduct(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         removeProductFromCart: (idProduct) => {
-            dispatch(removeProductFromCart(idProduct))
+            dispatch(removeProductFromCart(idProduct));
+        },
+        
+        increaseProductCount: (product) => {
+            dispatch(increaseProductCount(product));
+        },
+
+        decreaseProductCount: (product) => {
+            dispatch(decreaseProductCount(product));
         }
     }
 }

@@ -18,6 +18,8 @@ const bikes = [
             oldPrice: '1899.00',
             percent: '10%'
         },
+        inCart: false,
+        count: 1
     },
     {
         id: 2,
@@ -29,6 +31,8 @@ const bikes = [
         discount: {
             isActive: false,
         },
+        inCart: false,
+        count: 1
     },
     {
         id: 3,
@@ -40,6 +44,8 @@ const bikes = [
         discount: {
             isActive: false,
         },
+        inCart: false,
+        count: 1
     },
 ]
 

@@ -6,6 +6,8 @@ import CartList from '../../components/CartList/CartList'
 import { connect } from 'react-redux';
 
 function Cart(props) {
+    console.log(props.productCart);
+    
     return (
         <section className="section-cart">
             <BreadcrumbsPage caption="Cart" />
@@ -17,6 +19,8 @@ function Cart(props) {
         </section>
     );
 }
+
+
 
 const mapStateToProps = (state) => {
     return {

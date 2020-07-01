@@ -10,7 +10,9 @@
             "isActive": true,
             "oldPrice": "1899.00",
             "percent": "10%"
-        }
+        },
+        "inCart": false,
+        "count": 1
     },
     {
         "id": 2,
@@ -21,7 +23,9 @@
         "raiting": "3",
         "discount": {
             "isActive": false
-        }
+        },
+        "inCart": false,
+        "count": 1
     },
     {
         "id": 3,
@@ -32,6 +36,8 @@
         "raiting": "5",
         "discount": {
             "isActive": false
-        }
+        },
+        "inCart": false,
+        "count": 1
     }
 ]
