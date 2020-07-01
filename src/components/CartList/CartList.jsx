@@ -1,0 +1,32 @@
+import React from 'react';
+import './CartList.scss';
+
+import ProductCart from '../CartProduct/ProductCart'
+
+function CartList({products}) {
+
+
+    return (
+        <div className="cart-list">
+            <table className="cart-table">
+                <thead className="cart-table__head">
+                    <tr>
+                        <th>TEME</th>
+                        <th>NAME</th>
+                        <th>QUANTITY</th>
+                        <th>PRICE</th>
+                        <th>TOTAL PRICE</th>
+                        <th>REMOVE</th>
+                    </tr>
+                </thead>
+                <tbody className="cart-table__body">
+                    {
+                        products.map((product, key) => <ProductCart product={product} key={key} />)
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+export default CartList;

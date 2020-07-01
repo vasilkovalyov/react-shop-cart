@@ -1,0 +1,31 @@
+.quantity-counter {
+    display: flex;
+    align-items: center;
+
+    &__btn {
+        width: 40px;
+        width: 40px;
+        background: #ffffff;
+        border: 1px solid #dddddd;
+        display: inline-block;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 20px;
+        outline: none;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #dddddd;
+        }
+    }
+
+    &__input {
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        padding: 7px;
+        text-align: center;
+        width: 40px;
+        height: 35px;
+        margin: 0 10px;
+    }
+}

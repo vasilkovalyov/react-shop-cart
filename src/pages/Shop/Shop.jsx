@@ -3,6 +3,8 @@ import './Shop.scss';
 
 import ProductList from '../../components/ProductList/ProductList'
 
+import BreadcrumbsPage from '../../components/BreadcrumbsPage/BreadcrumbsPage'
+
 const bikes = [
     {
         id: 1,
@@ -44,9 +46,11 @@ const bikes = [
 function Shop() {
     return (
         <section className="section-shop">
-            <div className="container">
-                <h1>Shop page</h1>
-                <ProductList products={bikes}/>
+            <BreadcrumbsPage caption="Shop"/>
+            <div className="section-shop__inner">
+                <div className="container">
+                    <ProductList products={bikes}/>
+                </div>
             </div>
         </section>
     );

@@ -8,7 +8,7 @@ function HeaderTopNavigation(props) {
     const navigation = [
         {
             name: 'With List',
-            path: '/withlist',
+            path: '/wishlist',
         },
         {
             name: 'Shopping Cart',
