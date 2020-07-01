@@ -4,11 +4,13 @@ import './scss/style.scss';
 import App from './App';
 
 /* Import Redux store and the actions */
+import store from './redux/store/index'
+import { Provider } from 'react-redux';
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+      <App />
+  </Provider>,
   document.getElementById('root')
 );

@@ -4,6 +4,9 @@ import './Product.scss'
 import { NavLink } from 'react-router-dom';
 
 import RatingStar from '../RatingStar/RatingStar'
+import { connect } from 'react-redux';
+
+import { addProductToCart } from '../../redux/actions/cart/index'
 
 function Product(props) {
     let {id, image, price, currency, name, raiting, discount} = props.product;
@@ -46,9 +49,9 @@ function Product(props) {
                     }
                 </div>
             </div>
-            <div className="product__hidden_content">
+            <div className="product__hidden-content">
                 <div className="product__btn-wrap">
-                    <a href="#" className="product__btn" title="Add to Cart">add to cart</a>
+                    <a href="#" className="product__btn" title="Add to Cart" onClick={() => props.addProductToCart(props.product)}>add to cart</a>
                     <a href="#" className="product__btn" title="Add to Wishlist">
                         <span className="icon-chart-bar"></span>
                     </a>
@@ -61,4 +64,21 @@ function Product(props) {
     )
 }
 
-export default Product;
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        prop: state.prop
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addProductToCart: (product) => {
+            dispatch(addProductToCart(product));
+        }
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
