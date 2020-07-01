@@ -5,6 +5,9 @@ import RatingStar from '../RatingStar/RatingStar'
 import { Link } from 'react-router-dom';
 
 import QuantityCounter from '../QuantityCounter/QuantityCounter'
+import { connect } from 'react-redux';
+
+import { removeProductFromCart } from '../../redux/actions/cart/index'
 
 function CartProduct(props) {
     let {id, image, price, currency, name, raiting, discount} = props.product;
@@ -30,10 +33,18 @@ function CartProduct(props) {
                 <span className="product-cart__total-price">{price}{currency}</span>
             </td>
             <td className="product-cart__remove-cell">
-                <button className="product-cart__remove">x</button>
+                <button className="product-cart__remove" onClick={() => props.removeProductFromCart(id)}>x</button>
             </td>
         </tr>
     )
 }
 
-export default CartProduct;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeProductFromCart: (idProduct) => {
+            dispatch(removeProductFromCart(idProduct))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CartProduct);
