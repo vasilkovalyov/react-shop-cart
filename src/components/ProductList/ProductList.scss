@@ -1,12 +1,27 @@
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -40px;
+    
+    @media screen and (min-width: 768px) {
+        margin: 0 -15px;
+    }
+    
+    @media screen and (min-width: 1366px) {
+        margin: 0 -40px;
+    }
 
     .col {
         max-width: 33.33%;
         width: 100%;
-        padding: 0 40px;
+        
         display: flex;
+
+        @media screen and (min-width: 768px) {
+            padding: 0 15px;
+        }
+
+        @media screen and (min-width: 1366px) {
+            padding: 0 40px;
+        }
     }
 }

@@ -5,9 +5,8 @@ import ProductCart from '../CartProduct/ProductCart'
 
 function CartList({products}) {
 
-
-    return (
-        <div className="cart-list">
+    const table = () => {
+        return (
             <table className="cart-table">
                 <thead className="cart-table__head">
                     <tr>
@@ -25,6 +24,12 @@ function CartList({products}) {
                     }
                 </tbody>
             </table>
+        )
+    }
+
+    return (
+        <div className="cart-list">
+            {products.length > 0 ? table() : <h2>Cart is empry</h2>}
         </div>
     )
 }

@@ -1,8 +1,10 @@
 import React from 'react'
 import './HeaderInfoPanel.scss'
+import { connect } from 'react-redux';
 
-function HeaderInfoPanel() {
 
+
+function HeaderInfoPanel(props) {
     return (
         <div className="header-info-panel">
             <div className="info-circle">
@@ -14,7 +16,7 @@ function HeaderInfoPanel() {
             <div className="info-circle">
                 <span className="info-circle__icon-holder">
                     <span className="icon-shopping"></span>
-                    <span className="info-circle__counter">0</span>
+                    <span className="info-circle__counter">{props.productLength}</span>
                 </span>
                 <span className="price">$0.00</span>
             </div>
@@ -22,4 +24,11 @@ function HeaderInfoPanel() {
     )
 }
 
-export default HeaderInfoPanel;
+
+const mapStateToProps = (state) => {
+    return {
+        productLength: state.cart.cart.length
+    }
+}
+
+export default connect(mapStateToProps, null)(HeaderInfoPanel);

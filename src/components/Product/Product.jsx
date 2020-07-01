@@ -65,7 +65,7 @@ function Product(props) {
 }
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
         prop: state.prop
     }

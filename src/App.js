@@ -20,7 +20,6 @@ import ProductInner from './pages/ProductInner/ProductInner.jsx'
 class App extends Component {
 	
     render() {
-		console.log(this.props);
 		return (
 			<BrowserRouter id="wrapper">
 				<Header />
