@@ -2,7 +2,7 @@ import {
     ADD_PRODUCT_TO_CART, 
     REMOVE_PRODUCT_FROM_CART,
     INCREASE_PRODUCT_IN_CART,
-    DECREASE_PRODUCT_IN_CART
+    DECREASE_PRODUCT_IN_CART,
 } from '../../constants'
 
 import { existInArrayById, setValuePropsByIdAndGetData } from '../../../Custom/index'
@@ -73,6 +73,8 @@ function increaseProductCount(state, product) {
     //     cart: [...state.cart]
     // }
 
+    console.log(state);
+
     return {
         ...state,
         cart: [...newArray]
@@ -81,6 +83,7 @@ function increaseProductCount(state, product) {
 
 function decreaseProductCount(state, product) {
     if (product.count > 0) {
+        const targetProduct = existInArrayById(state.cart, product.id);
         product.count -= 1;
 
         return {

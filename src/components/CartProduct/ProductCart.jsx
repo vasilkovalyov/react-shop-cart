@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { 
     removeProductFromCart,
     increaseProductCount,
-    decreaseProductCount
+    decreaseProductCount,
 } from '../../redux/actions/cart/index'
 
 import { existInArrayById } from '../../Custom/index'
@@ -18,7 +18,6 @@ import { existInArrayById } from '../../Custom/index'
 
 function CartProduct(props) {
     let {id, image, price, currency, name, raiting, discount, count} = props.product;
-    
 
     return (
         <tr className="product-cart">
@@ -34,7 +33,7 @@ function CartProduct(props) {
             <td className="product-cart__quantity-cell">
                 <QuantityCounter 
                     count={count}
-                    handlerBtnDecrease = {() => props.increaseProductCount(props.product) }
+                    handlerBtnDecrease = {() => {console.log(props); props.increaseProductCount(props.product)} }
                     handlerBtnIncrease = {() => props.decreaseProductCount(props.product) }
                 />
             </td>
@@ -65,7 +64,7 @@ const mapDispatchToProps = (dispatch) => {
 
         decreaseProductCount: (product) => {
             dispatch(decreaseProductCount(product));
-        }
+        },
     }
 }
 
