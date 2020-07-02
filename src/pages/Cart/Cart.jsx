@@ -6,7 +6,6 @@ import CartList from '../../components/CartList/CartList'
 import { connect } from 'react-redux';
 
 function Cart(props) {
-    console.log(props.productCart);
     
     return (
         <section className="section-cart">

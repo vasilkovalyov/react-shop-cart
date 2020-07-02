@@ -13,8 +13,12 @@ import {
     decreaseProductCount
 } from '../../redux/actions/cart/index'
 
+import { existInArrayById } from '../../Custom/index'
+
+
 function CartProduct(props) {
     let {id, image, price, currency, name, raiting, discount, count} = props.product;
+    
 
     return (
         <tr className="product-cart">
@@ -46,6 +50,8 @@ function CartProduct(props) {
         </tr>
     )
 }
+
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

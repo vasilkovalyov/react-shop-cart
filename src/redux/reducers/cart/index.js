@@ -5,7 +5,7 @@ import {
     DECREASE_PRODUCT_IN_CART
 } from '../../constants'
 
-import { existInArrayById } from '../../../Custom/index'
+import { existInArrayById, setValuePropsByIdAndGetData } from '../../../Custom/index'
 
 const initialStore = {
     cart: []
@@ -63,16 +63,23 @@ function removeProductToCart(state, product, id) {
 }
 
 function increaseProductCount(state, product) {
-    product.count += 1;
+    const targetProduct = existInArrayById(state.cart, product.id);
+    // product.count += 1;
+    targetProduct[0].count += 1
+    const newArray = setValuePropsByIdAndGetData(state.cart, 'count', product.id, targetProduct[0].count);
+
+    // return {
+    //     ...state,
+    //     cart: [...state.cart]
+    // }
 
     return {
         ...state,
-        cart: [...state.cart]
+        cart: [...newArray]
     }
 }
 
 function decreaseProductCount(state, product) {
-    console.log(product.count);
     if (product.count > 0) {
         product.count -= 1;
 

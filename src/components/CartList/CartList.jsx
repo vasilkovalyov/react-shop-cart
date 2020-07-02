@@ -29,7 +29,7 @@ function CartList({products}) {
 
     return (
         <div className="cart-list">
-            {products.length > 0 ? table() : <h2>Cart is empry</h2>}
+            { products.length > 0 ? table() : <h2>Cart is empry</h2> }
         </div>
     )
 }
