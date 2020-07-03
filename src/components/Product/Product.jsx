@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { addProductToCart } from '../../redux/actions/cart/index'
 
 function Product(props) {
-    let {id, image, price, currency, name, raiting, discount} = props.product;
+    let {id, image, price, currency, name, raiting, discount, inCart} = props.product;
 
     let isDiscount = () => discount.isActive ? true : false;
 
@@ -38,6 +38,8 @@ function Product(props) {
             <div className="product__image">
                 <img src={`./images/${image}`} alt={name}/>
             </div>
+            {inCart ? 'cart' : 'not found'}
+            {image}
             <div className="product__body">
                 <h4>
                     <NavLink to={`/product/${id}`} className="product__name">{name}</NavLink>

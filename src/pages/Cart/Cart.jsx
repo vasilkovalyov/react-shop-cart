@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 
 function Cart(props) {
 
+    
+    
     return (
         <section className="section-cart">
             <BreadcrumbsPage caption="Cart" />

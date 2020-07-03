@@ -3,6 +3,7 @@ import {
     REMOVE_PRODUCT_FROM_CART,
     INCREASE_PRODUCT_IN_CART,
     DECREASE_PRODUCT_IN_CART,
+    UPDATE_CART
 } from '../../constants'
 
 import { existInArrayById, setValuePropsByIdAndGetData } from '../../../Custom/index'
@@ -11,19 +12,26 @@ const initialStore = {
     cart: []
 }
 
-const cart = (state = initialStore, {product, id, type}) => {
-    switch(type) {
+// {product, id, cart, type}
+
+const cart = (state = initialStore, action ) => {
+    switch(action.type) {
         case ADD_PRODUCT_TO_CART:
-            return addProductToCart(state, product);
+            return addProductToCart(state, action.payload.product);
 
         case REMOVE_PRODUCT_FROM_CART: 
-            return removeProductToCart(state, product, id);
+            return removeProductToCart(state, action.payload.product, action.payload.id);
 
         case INCREASE_PRODUCT_IN_CART:
-            return increaseProductCount(state, product);
+            return increaseProductCount(state, action.payload.product);
         
         case DECREASE_PRODUCT_IN_CART:
-            return decreaseProductCount(state, product);
+            return decreaseProductCount(state, action.payload.product);
+        
+        case UPDATE_CART: 
+            return {
+                ...cart
+            }
         
         default:
             return state;
@@ -64,21 +72,27 @@ function removeProductToCart(state, product, id) {
 
 function increaseProductCount(state, product) {
     const targetProduct = existInArrayById(state.cart, product.id);
-    // product.count += 1;
+    
     targetProduct[0].count += 1
-    const newArray = setValuePropsByIdAndGetData(state.cart, 'count', product.id, targetProduct[0].count);
+    // const newArray = setValuePropsByIdAndGetData(state.cart, 'count', product.id, targetProduct[0].count);
 
     // return {
     //     ...state,
-    //     cart: [...state.cart]
+    //     cart: [...newArray]
     // }
-
     console.log(state);
+    console.log(state.cart);
+    const arr = state.cart.map(item => {
+        if (item.id === product.id) {
+            return {...item, quantity: product.count + 1}
+        };
+    });
+
 
     return {
         ...state,
-        cart: [...newArray]
-    }
+        arr
+    };
 }
 
 function decreaseProductCount(state, product) {
@@ -92,3 +106,8 @@ function decreaseProductCount(state, product) {
         }
     }
 }
+// product.count += 1;
+// return {
+    //     ...state,
+    //     cart: [...state.cart]
+    // }
