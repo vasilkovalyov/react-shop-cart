@@ -17,6 +17,10 @@
             cursor: pointer;
             background-color: #dddddd;
         }
+
+        &[disabled] {
+            opacity: 0.5;
+        }
     }
 
     &__input {

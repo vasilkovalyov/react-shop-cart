@@ -1,5 +1,5 @@
 export const existInArrayById = (array, id) => {
-    return array.filter(item => item.id == id)
+    return array.filter(item => item.id === id)
 }
 
 export function setValuePropsByIdAndGetData(array, props, id, value) {

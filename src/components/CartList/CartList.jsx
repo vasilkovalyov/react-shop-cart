@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './CartList.scss';
 
 import ProductCart from '../CartProduct/ProductCart'
@@ -20,7 +20,13 @@ function CartList({products}) {
                 </thead>
                 <tbody className="cart-table__body">
                     {
-                        products.map((product, key) => <ProductCart product={product} key={key} />)
+                        products.map((product, key) => {
+                            return (
+                                <Fragment key={key}>
+                                    <ProductCart product={product} c={product.count}/>
+                                </Fragment>
+                            )
+                        })
                     }
                 </tbody>
             </table>
@@ -33,7 +39,6 @@ function CartList({products}) {
         </div>
     )
 }
-
 
 
 export default CartList;

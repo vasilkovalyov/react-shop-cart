@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Component} from 'react';
 import './ProductCart.scss';
 
 import RatingStar from '../RatingStar/RatingStar'
@@ -11,43 +11,73 @@ import {
     removeProductFromCart,
     increaseProductCount,
     decreaseProductCount,
+    changeCountProductInCart
 } from '../../redux/actions/cart/index'
 
-import { existInArrayById } from '../../Custom/index'
 
+class CartProduct extends Component {
 
-function CartProduct(props) {
-    let {id, image, price, currency, name, raiting, discount, count} = props.product;
+    state = {
+        inputValue: this.props.product.count
+    }
 
-    return (
-        <tr className="product-cart">
-            <td className="product-cart__image-cell">
-                <div className="product-cart__image">
-                    <img src={`../images/${image}`} alt={name}/>
-                </div>
-            </td>
-            <td className="product-cart__name-cell">
-                <Link to={`/product/${id}`} href="#" className="product-cart__name">{name}</Link>
-                <RatingStar raiting={raiting} raitingClass="product__list-rating"/>
-            </td>
-            <td className="product-cart__quantity-cell">
-                <QuantityCounter 
-                    count={count}
-                    handlerBtnDecrease = {() => {console.log(props); props.increaseProductCount(props.product)} }
-                    handlerBtnIncrease = {() => props.decreaseProductCount(props.product) }
-                />
-            </td>
-            <td className="product-cart__price-cell">
-                <span className="product-cart__price">{price}{currency}</span>
-            </td>
-            <td className="product-cart__total-price-cell">
-                <span className="product-cart__total-price">{price}{currency}</span>
-            </td>
-            <td className="product-cart__remove-cell">
-                <button className="product-cart__remove" onClick={() => props.removeProductFromCart(id)}>x</button>
-            </td>
-        </tr>
-    )
+    changeInput(input, idProduct) {
+        this.setState({
+            inputValue: parseInt(input)
+        })
+        
+        this.props.changeCountProductInCart(idProduct, input)
+    }
+
+    btnCounter() {
+        this.setState({
+            inputValue: parseInt(this.props.product.count)
+        })
+    }
+
+    render() {
+        let {id, image, price, currency, name, raiting, count} = this.props.product;
+
+        
+
+        return (
+            <tr className="product-cart">
+                
+                <td className="product-cart__image-cell">
+                    <div className="product-cart__image">
+                        <img src={`../images/${image}`} alt={name}/>
+                    </div>
+                </td>
+                <td className="product-cart__name-cell">
+                    <Link to={`/product/${id}`} href="#" className="product-cart__name">{name}</Link>
+                    <RatingStar raiting={raiting} raitingClass="product__list-rating"/>
+                </td>
+                <td className="product-cart__quantity-cell">
+                        <QuantityCounter 
+                        handlerBtnIncrease = {() => {
+                            this.props.increaseProductCount(id);
+                            this.btnCounter()
+                        }}
+                        count={this.state.inputValue}
+                        handlerBtnDecrease = {() => { 
+                            this.props.decreaseProductCount(id);
+                            this.btnCounter()
+                        }}
+                        handlerChangeInput = { (e) => this.changeInput(e.target.value, id) }
+                    />
+                </td>
+                <td className="product-cart__price-cell">
+                    <span className="product-cart__price">{price}{currency}</span>
+                </td>
+                <td className="product-cart__total-price-cell">
+                    <span className="product-cart__total-price">{price}{currency}</span>
+                </td>
+                <td className="product-cart__remove-cell">
+                    <button className="product-cart__remove" onClick={() => this.props.removeProductFromCart(id)}>x</button>
+                </td>
+            </tr>
+        )
+    }
 }
 
 
@@ -58,13 +88,17 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(removeProductFromCart(idProduct));
         },
         
-        increaseProductCount: (product) => {
-            dispatch(increaseProductCount(product));
+        increaseProductCount: (idProduct) => {
+            dispatch(increaseProductCount(idProduct));
         },
 
-        decreaseProductCount: (product) => {
-            dispatch(decreaseProductCount(product));
+        decreaseProductCount: (idProduct) => {
+            dispatch(decreaseProductCount(idProduct));
         },
+
+        changeCountProductInCart: (idProduct, countProduct) => {
+            dispatch(changeCountProductInCart(idProduct, countProduct));
+        }
     }
 }
 

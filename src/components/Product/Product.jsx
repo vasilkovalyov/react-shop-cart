@@ -51,13 +51,13 @@ function Product(props) {
             </div>
             <div className="product__hidden-content">
                 <div className="product__btn-wrap">
-                    <a href="#" className="product__btn" title="Add to Cart" onClick={() => props.addProductToCart(props.product)}>add to cart</a>
-                    <a href="#" className="product__btn" title="Add to Wishlist">
+                    <button className="product__btn" title="Add to Cart" onClick={() => props.addProductToCart(props.product)}>add to cart</button>
+                    <button className="product__btn" title="Add to Wishlist">
                         <span className="icon-chart-bar"></span>
-                    </a>
-                    <a href="#" className="product__btn" title="Add to Compare">
+                    </button>
+                    <button className="product__btn" title="Add to Compare">
                         <span className="icon-checkbox-checked"></span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

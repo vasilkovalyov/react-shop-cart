@@ -27,7 +27,7 @@ function HeaderInfoPanel(props) {
 
 const mapStateToProps = (state) => {
     return {
-        productLength: state.cart.cart.length
+        productLength: state.cart.cartLength
     }
 }
 

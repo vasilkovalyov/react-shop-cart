@@ -5,14 +5,14 @@ import BreadcrumbsPage from '../../components/BreadcrumbsPage/BreadcrumbsPage'
 import CartList from '../../components/CartList/CartList'
 import { connect } from 'react-redux';
 
-function Cart(props) {
+function Cart({productCart = []}) {
 
     return (
         <section className="section-cart">
             <BreadcrumbsPage caption="Cart" />
             <div className="section-cart__inner">
                 <div className="container">
-                    <CartList products={props.productCart}/>
+                    <CartList products={productCart}/>
                 </div>
             </div>
         </section>
