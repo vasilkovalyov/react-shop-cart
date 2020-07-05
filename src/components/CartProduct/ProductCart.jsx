@@ -27,7 +27,7 @@ class CartProduct extends Component {
             counterProduct: parseInt(input)
         })
         
-        this.props.changeCountProductInCart(idProduct, input)
+        this.props.changeCountProductInCart(idProduct, input);
     }
 
     btnCounter() {
@@ -36,7 +36,7 @@ class CartProduct extends Component {
         })
     }
 
-    getCalcPriceProduct = (price, countProduct) => parseFloat(price) * parseInt(countProduct);
+    getCalcPriceProduct = (price, countProduct) => (parseFloat(price) * parseInt(countProduct)).toFixed(2);
 
     render() {
         let {id, image, price, currency, name, raiting} = this.props.product;
@@ -58,12 +58,13 @@ class CartProduct extends Component {
                         <QuantityCounter 
                         handlerBtnIncrease = {() => {
                             this.props.increaseProductCount(id);
-                            this.btnCounter()
+                            this.btnCounter();
+                            
                         }}
                         count={this.state.counterProduct}
                         handlerBtnDecrease = {() => { 
                             this.props.decreaseProductCount(id);
-                            this.btnCounter()
+                            this.btnCounter();
                         }}
                         handlerChangeInput = { (e) => this.changeInput(e.target.value, id) }
                     />
@@ -75,7 +76,9 @@ class CartProduct extends Component {
                     <span className="product-cart__total-price">{this.getCalcPriceProduct(price, this.state.counterProduct)}{currency}</span>
                 </td>
                 <td className="product-cart__remove-cell">
-                    <button className="product-cart__remove" onClick={() => this.props.removeProductFromCart(id)}>x</button>
+                    <button className="product-cart__remove" onClick={() => {
+                        this.props.removeProductFromCart(id);
+                    }}>x</button>
                 </td>
             </tr>
         )

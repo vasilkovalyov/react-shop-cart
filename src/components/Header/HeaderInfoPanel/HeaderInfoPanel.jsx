@@ -18,7 +18,7 @@ function HeaderInfoPanel(props) {
                     <span className="icon-shopping"></span>
                     <span className="info-circle__counter">{props.productLength}</span>
                 </span>
-                <span className="price">$0.00</span>
+                <span className="price">{props.totalPrice ? `$${props.totalPrice}` : null}</span>
             </div>
         </div>
     )
@@ -27,7 +27,8 @@ function HeaderInfoPanel(props) {
 
 const mapStateToProps = (state) => {
     return {
-        productLength: state.cart.cartLength
+        productLength: state.cart.cartLength,
+        totalPrice: state.cart.totalPrice
     }
 }
 

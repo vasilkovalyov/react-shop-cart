@@ -3,7 +3,8 @@ import {
     REMOVE_PRODUCT_FROM_CART, 
     INCREASE_PRODUCT_IN_CART,
     DECREASE_PRODUCT_IN_CART,
-    CHANGE_COUNT_PRODUCT_IN_CART
+    CHANGE_COUNT_PRODUCT_IN_CART,
+    UPDATE_TOTAL_PRODUCT_PRICE
 } from '../../constants'
 
 
@@ -15,6 +16,7 @@ export const addProductToCart = (product) => {
                 product
             }
         })
+        dispatch(updataTotalProductPrice())
     }
 }
 
@@ -26,6 +28,8 @@ export const removeProductFromCart = (id) => {
                 id
             }
         })
+        dispatch(updataTotalProductPrice())
+
     }
 }
 
@@ -37,6 +41,7 @@ export const increaseProductCount = (id) => {
                 id
             }
         })
+        dispatch(updataTotalProductPrice())
     }
 }
 
@@ -48,6 +53,7 @@ export const decreaseProductCount = (id) => {
                 id
             }
         })
+        dispatch(updataTotalProductPrice())
     }
 }
 
@@ -59,6 +65,15 @@ export const changeCountProductInCart = (id, count) => {
                 id,
                 count
             }
+        })
+        dispatch(updataTotalProductPrice())
+    }
+}
+
+export const updataTotalProductPrice = () => {
+    return (dispatch) => {
+        dispatch({
+            type: UPDATE_TOTAL_PRODUCT_PRICE,
         })
     }
 }

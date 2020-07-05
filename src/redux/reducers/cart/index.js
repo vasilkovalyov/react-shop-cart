@@ -3,14 +3,18 @@ import {
     REMOVE_PRODUCT_FROM_CART,
     INCREASE_PRODUCT_IN_CART,
     DECREASE_PRODUCT_IN_CART,
-    CHANGE_COUNT_PRODUCT_IN_CART
+    CHANGE_COUNT_PRODUCT_IN_CART,
+    UPDATE_TOTAL_PRODUCT_PRICE
 } from '../../constants'
 
-import { existInArrayById, setValuePropsByIdAndGetData } from '../../../Custom/index'
+import { existInArrayById, setValuePropsByIdAndGetData } from '../../../Custom/index';
+import { calcTotalPriceCart } from '../../../Custom/index';
+
 
 const initialStore = {
     cart: [],
-    cartLength: 0
+    cartLength: 0,
+    totalPrice: 0
 }
 
 const cart = (state = initialStore, action) => {
@@ -29,6 +33,9 @@ const cart = (state = initialStore, action) => {
         
         case CHANGE_COUNT_PRODUCT_IN_CART:
             return changeCountProductInCart(state, action.payload.id, action.payload.count);
+
+        case UPDATE_TOTAL_PRODUCT_PRICE:
+            return updataTotalProductPrice(state);
         
         default:
             return state;
@@ -104,5 +111,12 @@ function changeCountProductInCart(state, idProduct, countProduct) {
     return {
         cart: [...newArray],
         cartLength: newCartLength
+    }
+}
+
+function updataTotalProductPrice(state) {
+    return {
+        ...state,
+        totalPrice: calcTotalPriceCart(state.cart)
     }
 }
