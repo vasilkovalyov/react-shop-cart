@@ -1,12 +1,13 @@
 import React from 'react'
 import './Product.scss'
 
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import RatingStar from '../RatingStar/RatingStar'
 import { connect } from 'react-redux';
 
 import { addProductToCart } from '../../redux/actions/cart/index'
+import { addProductToWishlist  } from '../../redux/actions/wishlist/index'
 
 function Product(props) {
     let {id, image, price, currency, name, raiting, discount} = props.product;
@@ -40,7 +41,7 @@ function Product(props) {
             </div>
             <div className="product__body">
                 <h4>
-                    <NavLink to={`/product/${id}`} className="product__name">{name}</NavLink>
+                    <Link to={`/product/${id}`} className="product__name">{name}</Link>
                 </h4>
                 <RatingStar raiting={raiting} raitingClass="product__list-rating"/>
                 <div className="product__price-holder">
@@ -52,7 +53,7 @@ function Product(props) {
             <div className="product__hidden-content">
                 <div className="product__btn-wrap">
                     <button className="product__btn" title="Add to Cart" onClick={() => props.addProductToCart(props.product)}>add to cart</button>
-                    <button className="product__btn" title="Add to Wishlist">
+                    <button className="product__btn" title="Add to Wishlist" onClick={() => props.addProductToWishlist(props.product)}>
                         <span className="icon-chart-bar"></span>
                     </button>
                     <button className="product__btn" title="Add to Compare">
@@ -75,6 +76,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addProductToCart: (product) => {
             dispatch(addProductToCart(product));
+        },
+        addProductToWishlist: (product) => {
+            dispatch(addProductToWishlist(product))
         }
     }
 }

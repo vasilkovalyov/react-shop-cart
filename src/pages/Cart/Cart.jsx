@@ -2,8 +2,8 @@ import React from 'react';
 import './Cart.scss';
 
 import BreadcrumbsPage from '../../components/BreadcrumbsPage/BreadcrumbsPage'
-import CartList from '../../components/CartList/CartList'
-import CartTotal from '../../components/CartTotal/CartTotal'
+import CartList from '../../components/Cart/CartList/CartList'
+import CartTotal from '../../components/Cart/CartTotal/CartTotal'
 import { connect } from 'react-redux';
 
 function Cart({productCart = []}) {

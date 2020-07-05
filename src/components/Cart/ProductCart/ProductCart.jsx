@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './ProductCart.scss';
 
-import RatingStar from '../RatingStar/RatingStar'
+import RatingStar from '../../RatingStar/RatingStar'
 import { Link } from 'react-router-dom';
 
-import QuantityCounter from '../QuantityCounter/QuantityCounter'
+import QuantityCounter from '../../QuantityCounter/QuantityCounter'
 import { connect } from 'react-redux';
 
 import { 
@@ -12,7 +12,7 @@ import {
     increaseProductCount,
     decreaseProductCount,
     changeCountProductInCart
-} from '../../redux/actions/cart/index'
+} from '../../../redux/actions/cart/index'
 
 
 class CartProduct extends Component {

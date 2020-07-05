@@ -1,0 +1,50 @@
+.wishcard {
+    position: relative;
+
+    &__image {
+        width: 100%;
+        display: inline-block;
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    &__body {
+        text-align: center;
+        padding: 20px 15px;
+    }
+
+    &__name {
+        color: #1b222a;
+        font-size: 16px;
+
+        &:hover {
+            color: #ff8f00;
+        }
+    }
+
+    &__btn-remove {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #2ba8db;
+        border-radius: 5px;
+        color: #ffffff;
+        display: block;
+        font-weight: bold;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        border: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: color 0.3s linear;
+
+        &:hover {
+            cursor: pointer;
+            color: #ff8f00;
+        }
+    }
+}

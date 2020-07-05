@@ -3,7 +3,7 @@ import React from 'react'
 import './CartTotal.scss'
 import { connect } from 'react-redux'
 
-import { calcTotalPriceCart } from '../../Custom/index'
+import { calcTotalPriceCart } from '../../../Custom/index'
 
 function CartTotal(props) {
 

@@ -115,7 +115,6 @@ function changeCountProductInCart(state, idProduct, countProduct) {
 }
 
 function updataTotalProductPrice(state) {
-    console.log(calcTotalPriceCart(state.cart));
     return {
         ...state,
         totalPrice: calcTotalPriceCart(state.cart)

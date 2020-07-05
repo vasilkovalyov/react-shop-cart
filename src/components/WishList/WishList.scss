@@ -1,0 +1,11 @@
+.wishlist {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 20px;
+
+    .col {
+        max-width: 25%;
+        width: 100%;
+        padding: 0 20px;
+    }
+}

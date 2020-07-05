@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import './CartList.scss';
 
-import ProductCart from '../CartProduct/ProductCart'
+import ProductCart from '../ProductCart/ProductCart'
 
 function CartList({products}) {
 
