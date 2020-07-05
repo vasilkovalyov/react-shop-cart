@@ -18,7 +18,7 @@ function HeaderInfoPanel(props) {
                     <span className="icon-shopping"></span>
                     <span className="info-circle__counter">{props.productLength}</span>
                 </span>
-                <span className="price">{props.totalPrice ? `$${props.totalPrice}` : null}</span>
+                <span className="price">{parseInt(props.totalPrice) !== 0 ? `$${props.totalPrice}` : null}</span>
             </div>
         </div>
     )
