@@ -18,12 +18,13 @@ import {
 class CartProduct extends Component {
 
     state = {
-        inputValue: this.props.product.count
+        counterProduct: this.props.product.count,
     }
 
+    
     changeInput(input, idProduct) {
         this.setState({
-            inputValue: parseInt(input)
+            counterProduct: parseInt(input)
         })
         
         this.props.changeCountProductInCart(idProduct, input)
@@ -31,14 +32,15 @@ class CartProduct extends Component {
 
     btnCounter() {
         this.setState({
-            inputValue: parseInt(this.props.product.count)
+            counterProduct: parseInt(this.props.product.count)
         })
     }
 
-    render() {
-        let {id, image, price, currency, name, raiting, count} = this.props.product;
+    getCalcPriceProduct = (price, countProduct) => parseFloat(price) * parseInt(countProduct);
 
-        
+    render() {
+        let {id, image, price, currency, name, raiting} = this.props.product;
+
 
         return (
             <tr className="product-cart">
@@ -58,7 +60,7 @@ class CartProduct extends Component {
                             this.props.increaseProductCount(id);
                             this.btnCounter()
                         }}
-                        count={this.state.inputValue}
+                        count={this.state.counterProduct}
                         handlerBtnDecrease = {() => { 
                             this.props.decreaseProductCount(id);
                             this.btnCounter()
@@ -70,7 +72,7 @@ class CartProduct extends Component {
                     <span className="product-cart__price">{price}{currency}</span>
                 </td>
                 <td className="product-cart__total-price-cell">
-                    <span className="product-cart__total-price">{price}{currency}</span>
+                    <span className="product-cart__total-price">{this.getCalcPriceProduct(price, this.state.counterProduct)}{currency}</span>
                 </td>
                 <td className="product-cart__remove-cell">
                     <button className="product-cart__remove" onClick={() => this.props.removeProductFromCart(id)}>x</button>

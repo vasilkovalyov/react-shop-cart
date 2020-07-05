@@ -11,3 +11,9 @@ export function setValuePropsByIdAndGetData(array, props, id, value) {
 
     return array;
 }
+
+export function calcTotalPriceCart(arrayProducts, count, price) {
+    return arrayProducts.reduce((accumulator, targetProduct) => {
+        return accumulator += (parseInt(targetProduct[count]) * parseFloat(targetProduct[price]));
+    }, 0)
+}

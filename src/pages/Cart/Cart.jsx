@@ -3,6 +3,7 @@ import './Cart.scss';
 
 import BreadcrumbsPage from '../../components/BreadcrumbsPage/BreadcrumbsPage'
 import CartList from '../../components/CartList/CartList'
+import CartTotal from '../../components/CartTotal/CartTotal'
 import { connect } from 'react-redux';
 
 function Cart({productCart = []}) {
@@ -13,6 +14,9 @@ function Cart({productCart = []}) {
             <div className="section-cart__inner">
                 <div className="container">
                     <CartList products={productCart}/>
+                    <div className="section-cart__bottom">
+                        { productCart.length > 0 ? <CartTotal /> : null}
+                    </div>
                 </div>
             </div>
         </section>
