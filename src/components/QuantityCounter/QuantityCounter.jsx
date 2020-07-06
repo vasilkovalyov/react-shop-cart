@@ -6,9 +6,9 @@ function QuantityCounter(props) {
 
     return (
         <div className="quantity-counter">
-            <button className="quantity-counter__btn" onClick={props.handlerBtnIncrease.bind(null,count)}>-</button>
-            <input type="text" className="quantity-counter__input" defaultValue={count}/>
-            <button className="quantity-counter__btn" onClick={props.handlerBtnDecrease.bind(null,count)}>+</button>
+            <button className="quantity-counter__btn" disabled={ count === 1 ? true : false} onClick={ () => props.handlerBtnDecrease(count)}>-</button>
+            <input type="text" className="quantity-counter__input" value={count} onChange={ (inputValue) => props.handlerChangeInput(inputValue) } />
+            <button className="quantity-counter__btn" onClick={ () => props.handlerBtnIncrease(count)}>+</button>
         </div>
     )
 }

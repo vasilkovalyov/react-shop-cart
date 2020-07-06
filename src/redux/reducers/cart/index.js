@@ -3,35 +3,39 @@ import {
     REMOVE_PRODUCT_FROM_CART,
     INCREASE_PRODUCT_IN_CART,
     DECREASE_PRODUCT_IN_CART,
-    UPDATE_CART
+    CHANGE_COUNT_PRODUCT_IN_CART,
+    UPDATE_TOTAL_PRODUCT_PRICE
 } from '../../constants'
 
-import { existInArrayById, setValuePropsByIdAndGetData } from '../../../Custom/index'
+import { existInArrayById, setValuePropsByIdAndGetData } from '../../../Custom/index';
+import { calcTotalPriceCart } from '../../../Custom/index';
+
 
 const initialStore = {
-    cart: []
+    cart: [],
+    cartLength: 0,
+    totalPrice: 0
 }
 
-// {product, id, cart, type}
-
-const cart = (state = initialStore, action ) => {
+const cart = (state = initialStore, action) => {
     switch(action.type) {
         case ADD_PRODUCT_TO_CART:
             return addProductToCart(state, action.payload.product);
 
         case REMOVE_PRODUCT_FROM_CART: 
-            return removeProductToCart(state, action.payload.product, action.payload.id);
+            return removeProductToCart(state, action.payload.id);
 
         case INCREASE_PRODUCT_IN_CART:
-            return increaseProductCount(state, action.payload.product);
+            return increaseProductCount(state, action.payload.id);
         
         case DECREASE_PRODUCT_IN_CART:
-            return decreaseProductCount(state, action.payload.product);
-        
-        case UPDATE_CART: 
-            return {
-                ...cart
-            }
+            return decreaseProductCount(state, action.payload.id);
+
+        case CHANGE_COUNT_PRODUCT_IN_CART:
+            return changeCountProductInCart(state, action.payload.id, action.payload.count);
+
+        case UPDATE_TOTAL_PRODUCT_PRICE:
+            return updataTotalProductPrice(state);
         
         default:
             return state;
@@ -39,6 +43,7 @@ const cart = (state = initialStore, action ) => {
 }
 
 export default cart;
+
 
 function addProductToCart(state, product) {
     const productInCart = existInArrayById(state.cart, product.id);
@@ -49,65 +54,69 @@ function addProductToCart(state, product) {
 
         return {
             ...state,
-            cart: [...state.cart, product]
+            cart: [...state.cart, product],
+            cartLength: state.cartLength + 1
         }
         
     } else {
         product.count += 1;
+
         return {
-            ...state,
-            cart: [...state.cart]
+            cart: [...state.cart],
+            cartLength: state.cartLength + 1
         }
     }
 }
 
-function removeProductToCart(state, product, id) {
-    let newProductArray = state.cart.filter(product => product.id !== id);
+function removeProductToCart(state, idProduct) {
+    let newProductArray = state.cart.filter(product => product.id !== idProduct);
+    let targetProduct = state.cart.filter(product => product.id === idProduct);
 
     return {
-        ...state,
-        cart: newProductArray
+        cart: newProductArray,
+        cartLength: state.cartLength - targetProduct[0].count
     }
 }
 
-function increaseProductCount(state, product) {
-    const targetProduct = existInArrayById(state.cart, product.id);
-    
+function increaseProductCount(state, idProduct) {
+    const targetProduct = existInArrayById(state.cart, idProduct);
     targetProduct[0].count += 1
-    // const newArray = setValuePropsByIdAndGetData(state.cart, 'count', product.id, targetProduct[0].count);
-
-    // return {
-    //     ...state,
-    //     cart: [...newArray]
-    // }
-    console.log(state);
-    console.log(state.cart);
-    const arr = state.cart.map(item => {
-        if (item.id === product.id) {
-            return {...item, quantity: product.count + 1}
-        };
-    });
-
+    const newArray = setValuePropsByIdAndGetData(state.cart, 'count', idProduct, targetProduct[0].count);
 
     return {
-        ...state,
-        arr
-    };
+        cart: [...newArray],
+        cartLength: state.cartLength + 1
+    }
 }
 
-function decreaseProductCount(state, product) {
-    if (product.count > 0) {
-        const targetProduct = existInArrayById(state.cart, product.id);
-        product.count -= 1;
+function decreaseProductCount(state, idProduct) {
+    const targetProduct = existInArrayById(state.cart, idProduct);
+    targetProduct[0].count -= 1;
 
+    if (targetProduct[0].count > 0) {
         return {
-            ...state,
-            cart: [...state.cart]
+            cart: [...state.cart],
+            cartLength: state.cartLength - 1
         }
     }
 }
-// product.count += 1;
-// return {
-    //     ...state,
-    //     cart: [...state.cart]
-    // }
+
+function changeCountProductInCart(state, idProduct, countProduct) {
+    const targetProduct = existInArrayById(state.cart, idProduct);
+    targetProduct.count = countProduct;
+
+    const newArray = setValuePropsByIdAndGetData(state.cart, 'count', idProduct, targetProduct[0].count);
+    const newCartLength = newArray.reduce((accumulator, targetProduct) => accumulator + targetProduct.count, countProduct);
+
+    return {
+        cart: [...newArray],
+        cartLength: newCartLength
+    }
+}
+
+function updataTotalProductPrice(state) {
+    return {
+        ...state,
+        totalPrice: calcTotalPriceCart(state.cart)
+    }
+}
