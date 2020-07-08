@@ -2,6 +2,9 @@ import React from 'react'
 import './WishCard.scss'
 
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { removeProductFromWishlist  } from '../../redux/actions/wishlist/index'
 
 const WishCard = (props) => {
     let {id, image, name, price, currency} = props.product;
@@ -10,7 +13,7 @@ const WishCard = (props) => {
         <div className="wishcard">
             <div className="wishcard__image">
                 <input type="checkbox"/>
-                <button className="wishcard__btn-remove">x</button>
+                <button className="wishcard__btn-remove" onClick={() => props.removeProductFromWishlist(id)}>x</button>
                 <img src={`./images/${image}`} alt={name}/>
             </div>
             <div className="wishcard__body">
@@ -23,4 +26,12 @@ const WishCard = (props) => {
     )
 }
 
-export default WishCard;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeProductFromWishlist: (productId) => {
+            dispatch(removeProductFromWishlist(productId))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(WishCard);

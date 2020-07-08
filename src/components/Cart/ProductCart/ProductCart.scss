@@ -47,3 +47,26 @@
         font-size: 14px;
     }
 }
+
+
+.product-cart-animation-enter {
+    opacity: 0;
+    top: 40%;
+}
+
+.product-cart-animation-enter-active {
+    opacity: 1;
+    transition: all 0.3s linear;
+    top: 30%;
+}
+
+.product-cart-animation-exit {
+    opacity: 1;
+    top: 30%;
+}
+
+.product-cart-animation-exit-active {
+    opacity: 0;
+    top: 40%;
+    transition: all 0.3s linear;
+}

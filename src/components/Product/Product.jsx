@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Product.scss'
-
 import { Link } from 'react-router-dom';
 
 import RatingStar from '../RatingStar/RatingStar'
+import NotificationProduct from '../NotificationProduct/NotificationProduct';
+
 import { connect } from 'react-redux';
 
 import { addProductToCart } from '../../redux/actions/cart/index'
 import { addProductToWishlist  } from '../../redux/actions/wishlist/index'
 
 function Product(props) {
-    let {id, image, price, currency, name, raiting, discount, inCart} = props.product;
+    const speedNotification = 1000;
+    const msgAddToCart = "Product add to cart";
+    const msgAddToWishlist = "Product add to wishlist";
+
+    let {id, image, price, currency, name, raiting, discount, inCart, inWishlist} = props.product;
+
+    let [isNotification, showNotification] = useState(false);
+    let [messageNotification, setMessageNotification] = useState(null);
 
     let isDiscount = () => discount.isActive ? true : false;
 
@@ -32,6 +40,15 @@ function Product(props) {
             )  
         }
     }
+
+    function notificationAction(message) {
+        setMessageNotification(messageNotification = message);
+        showNotification(isNotification = true);
+
+        setTimeout(() => {
+            showNotification(isNotification = false);
+        }, speedNotification);
+    }
     
     return (
         <div className="product">
@@ -49,15 +66,26 @@ function Product(props) {
                         determinePrice(isDiscount(), price, discount.oldPrice)
                     }
                 </div>
+                <NotificationProduct 
+                    cls="product__"
+                    message={ messageNotification } 
+                    isActive={ isNotification }
+                    />
             </div>
             <div className="product__hidden-content">
                 <div className="product__btn-wrap">
-                    <button className="product__btn" title="Add to Cart" onClick={() => props.addProductToCart(props.product)}>add to cart</button>
-                    <button className="product__btn" title="Add to Wishlist" onClick={() => props.addProductToWishlist(props.product)}>
+                    <button className="product__btn" title="Add to Cart" onClick={() => {
+                            props.addProductToCart(props.product);
+                            notificationAction(msgAddToCart);
+                        }}>add to cart</button>
+                    <button 
+                        className={`product__btn ${inWishlist ? 'active' : null}`}
+                        title="Add to Wishlist" 
+                        onClick={() => {
+                            props.addProductToWishlist(props.product);
+                            notificationAction(msgAddToWishlist);
+                        }}>
                         <span className="icon-chart-bar"></span>
-                    </button>
-                    <button className="product__btn" title="Add to Compare">
-                        <span className="icon-checkbox-checked"></span>
                     </button>
                 </div>
             </div>

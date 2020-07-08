@@ -13,10 +13,6 @@ function HeaderTopNavigation(props) {
         {
             name: 'Shopping Cart',
             path: '/cart',
-        },
-        {
-            name: 'Checkout',
-            path: '/checkout',
         }
     ]
 
