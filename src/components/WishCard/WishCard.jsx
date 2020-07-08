@@ -4,15 +4,27 @@ import './WishCard.scss'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { removeProductFromWishlist  } from '../../redux/actions/wishlist/index'
+import { 
+    removeProductFromWishlist, 
+    addProductToCheckedWishlist, 
+    removeProductToCheckedWishlist  
+} from '../../redux/actions/wishlist/index'
 
 const WishCard = (props) => {
     let {id, image, name, price, currency} = props.product;
 
+    let checkWishProduct = (product, checked) => {
+        if(checked) {
+            props.addProductToCheckedWishlist(product)
+        } else {
+            props.removeProductToCheckedWishlist(product.id)
+        }
+    }
+
     return (
         <div className="wishcard">
             <div className="wishcard__image">
-                <input type="checkbox"/>
+                <input type="checkbox" onChange={(e) => checkWishProduct(props.product, e.target.checked) } />
                 <button className="wishcard__btn-remove" onClick={() => props.removeProductFromWishlist(id)}>x</button>
                 <img src={`./images/${image}`} alt={name}/>
             </div>
@@ -30,6 +42,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         removeProductFromWishlist: (productId) => {
             dispatch(removeProductFromWishlist(productId))
+        },
+        addProductToCheckedWishlist: (product) => {
+            dispatch(addProductToCheckedWishlist(product))
+        },
+        removeProductToCheckedWishlist: (idProduct) => {
+            dispatch(removeProductToCheckedWishlist(idProduct))
         }
     }
 }

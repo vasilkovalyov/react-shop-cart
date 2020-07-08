@@ -1,13 +1,16 @@
 import {
     ADD_PRODUCT_TO_WISHLIST,
-    REMOVE_PRODUCT_FROM_WISHLIST
+    REMOVE_PRODUCT_FROM_WISHLIST,
+    ADD_PRODUCT_CHECKED_WISHLIST,
+    REMOVE_PRODUCT_CHECKED_WISHLIST
 } from '../../constants'
 
 import { existInArrayById } from '../../../Custom/index'
 
 const initialStore = {
     wishlist: [],
-    wishlistLength: 0
+    wishlistLength: 0,
+    checkedWishlist: []
 }
 
 const cart = (state = initialStore, action) => {
@@ -16,6 +19,10 @@ const cart = (state = initialStore, action) => {
             return addProductToWishlist(state, action.payload.product);
         case REMOVE_PRODUCT_FROM_WISHLIST:
             return removeProductFromWishlist(state, action.payload.productId)
+        case ADD_PRODUCT_CHECKED_WISHLIST :
+            return addProductToCheckedWishlist(state, action.payload.product)
+        case REMOVE_PRODUCT_CHECKED_WISHLIST :
+            return removeProductToCheckedWishlist(state, action.payload.productId)
         default :
             return state;
     }
@@ -50,5 +57,22 @@ function removeProductFromWishlist(state, productId) {
         ...state,
         wishlist: newWishlistArray,
         wishlistLength: newWishlistArray.length
+    }
+}
+
+
+function addProductToCheckedWishlist(state, product) {
+    return {
+        ...state,
+        checkedWishlist: [...state.checkedWishlist, product]
+    }
+}
+
+function removeProductToCheckedWishlist(state, productId) {
+    let newWishlistArray = state.checkedWishlist.filter(product => product.id !== productId);
+
+    return {
+        ...state,
+        checkedWishlist: newWishlistArray
     }
 }
